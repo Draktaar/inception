@@ -6,7 +6,9 @@
 #    By: achu <achu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/30 12:24:28 by achu              #+#    #+#              #
-#    Updated: 2025/08/30 12:24:28 by achu             ###   ########.fr        #
+#    Updated: 2025/09/25 18:46:31 by achu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+FROM debian:bookworm
+WORKDIR /scrs/requirements/nginx
