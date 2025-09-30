@@ -6,8 +6,10 @@
 #    By: achu <achu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/30 12:24:28 by achu              #+#    #+#              #
-#    Updated: 2025/09/28 14:10:47 by achu             ###   ########.fr        #
+#    Updated: 2025/09/28 16:04:20 by achu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM debian:bookworm
+
+RUN apt-get update -y && apt upgrade -y && apt-get -y install wget
