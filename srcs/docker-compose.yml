@@ -33,7 +33,7 @@ services:
         depends_on:
           - wordpress
         volumes:
-         - wordpress:/var/www/html
+          - wordpress:/var/www/html
         networks:
           - inception
         ports:
@@ -58,6 +58,5 @@ volumes:
 
 networks:
     inception:
-        name: inception
         driver: bridge
 

@@ -9,7 +9,7 @@ cd /var/www/html
 
 # Configure PHP-FPM on the first run
 if [ ! -e /etc/.firstrun ]; then
-    sed -i 's/listen = 127.0.0.1:9000/listen = 9000/g' /etc/php/8.2/fpm/pool.d/www.conf
+    sed -i 's/listen = \/run\/php\/php8.2-fpm.sock/listen = 9000/g' /etc/php/8.2/fpm/pool.d/www.conf
     touch /etc/.firstrun
 fi
 
@@ -38,4 +38,4 @@ if [ ! -e .firstmount ]; then
 fi
 
 # Start PHP-FPM
-exec /usr/sbin/php-fpm8.2	 -F
+exec /usr/sbin/php-fpm8.2 -F
