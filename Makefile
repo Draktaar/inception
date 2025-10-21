@@ -12,22 +12,25 @@
 
 DOCKER_COMPOSE_PATH=./srcs/docker-compose.yml
 DATA_PATH= $(HOME)/data
-MARIADB_DATA_PATH=$(DATA_PATH)/mariadb
+MARIADB_DATA_PATH=$(DATA_PATH)/mysql
 WORDPRESS_DATA_PATH=$(DATA_PATH)/wordpress
 
 all: dir up
 
-build: docker compose -f $(DOCKER_COMPOSE_PATH) up -d --build
+rebuild: down dir build
 
-up: docker compose -f $(DOCKER_COMPOSE_PATH) up -d
+build:
+	docker compose -f $(DOCKER_COMPOSE_PATH) up -d --build
 
-down: docker compose -f $(DOCKER_COMPOSE_PATH) down
+up:
+	docker compose -f $(DOCKER_COMPOSE_PATH) up -d
 
-rebuild:
-	down
+down:
+	docker compose -f $(DOCKER_COMPOSE_PATH) down
+
+dir:
 	mkdir -p $(MARIADB_DATA_PATH)
 	mkdir -p $(WORDPRESS_DATA_PATH)
-	build
 
 clean: down
 	docker system prune -a
@@ -41,4 +44,4 @@ fclean: down
 	rm -rf $(MARIADB_DATA_PATH)
 	rm -rf $(WORDPRESS_DATA_PATH)
 
-PHONY.: all build up down rebuild clean fclean
+PHONY.: all build up down rebuild dir clean fclean

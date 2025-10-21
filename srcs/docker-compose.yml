@@ -1,7 +1,7 @@
 services:
     mariadb:
         container_name: mariadb
-        build: /home/achu/inception/srcs/requirements/mariadb
+        build: ${HOME}/inception/srcs/requirements/mariadb
         env_file:
           - .env
         volumes:
@@ -13,7 +13,7 @@ services:
         restart: always
     wordpress:
         container_name: wordpress
-        build: /home/achu/inception/srcs/requirements/wordpress
+        build: ${HOME}/inception/srcs/requirements/wordpress
         env_file:
           - .env
         depends_on:
@@ -27,7 +27,7 @@ services:
         restart: always
     nginx:
         container_name: nginx
-        build: /home/achu/inception/srcs/requirements/nginx
+        build: ${HOME}/inception/srcs/requirements/nginx
         env_file:
           - .env
         depends_on:
@@ -46,14 +46,14 @@ volumes:
         driver: local
         driver_opts:
             type: none
-            device: /home/achu/data/mysql
+            device: ${HOME}/data/mysql
             o: bind
     wordpress:
         name: wordpress
         driver: local
         driver_opts:
             type: none
-            device: /home/achu/data/wordpress
+            device: ${HOME}/data/wordpress
             o: bind
 
 networks:
