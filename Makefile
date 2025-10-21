@@ -34,14 +34,14 @@ dir:
 
 clean: down
 	docker system prune -a
-	rm -rf $(MARIADB_DATA_PATH)
-	rm -rf $(WORDPRESS_DATA_PATH)
+	sudo rm -rf $(MARIADB_DATA_PATH)
+	sudo rm -rf $(WORDPRESS_DATA_PATH)
 
 fclean: down
-	docker system prune -afv
+	docker system prune -af
 	docker volume prune -f
 	docker network prune -f
-	rm -rf $(MARIADB_DATA_PATH)
-	rm -rf $(WORDPRESS_DATA_PATH)
+	sudo rm -rf $(MARIADB_DATA_PATH)
+	sudo rm -rf $(WORDPRESS_DATA_PATH)
 
 PHONY.: all build up down rebuild dir clean fclean
