@@ -34,7 +34,7 @@ if [ ! -e .firstmount ]; then
         echo "WordPress is already installed."
     fi
     chmod o+w -R /var/www/html/wp-content
-    touch .firstmount
+    touch /etc/.firstmount
 fi
 
 # Start PHP-FPM

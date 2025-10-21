@@ -1,19 +1,19 @@
-version:	'3.5'
-
 services:
     mariadb:
         container_name: mariadb
-        build: ./srcs/requirements/mariadb
+        build: /home/achu/inception/srcs/requirements/mariadb
         env_file:
           - .env
         volumes:
           - mariadb:/var/lib/mysql
         networks:
           - inception
+        expose:
+        - "3306"
         restart: always
     wordpress:
         container_name: wordpress
-        build: ./srcs/requirements/wordpress
+        build: /home/achu/inception/srcs/requirements/wordpress
         env_file:
           - .env
         depends_on:
@@ -22,10 +22,12 @@ services:
           - wordpress:/var/www/html
         networks:
           - inception
+        expose:
+        - "9000"
         restart: always
     nginx:
         container_name: nginx
-        build: ./srcs/requirements/nginx
+        build: /home/achu/inception/srcs/requirements/nginx
         env_file:
           - .env
         depends_on:
@@ -57,4 +59,5 @@ volumes:
 networks:
     inception:
         name: inception
+        driver: bridge
 
