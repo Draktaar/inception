@@ -1,7 +1,8 @@
 #!/bin/bash
 
+mkdir -p /etc/nginx/ssl
+
 if [ ! -e /etc/.firstrun ]; then
-	# Generate a certificate for HTTPS
 	openssl req -x509 -days 365 -newkey rsa:2048 -nodes \
 		-out '/etc/nginx/ssl/cert.crt' \
 		-keyout '/etc/nginx/ssl/cert.key' \

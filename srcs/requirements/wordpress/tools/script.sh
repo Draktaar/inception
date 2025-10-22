@@ -7,21 +7,21 @@ mv wp-cli.phar /usr/local/bin/wp
 
 cd /var/www/html
 
-# Configure PHP-FPM on the first run
 if [ ! -e /etc/.firstrun ]; then
     sed -i 's/listen = \/run\/php\/php8.2-fpm.sock/listen = 9000/g' /etc/php/8.2/fpm/pool.d/www.conf
     touch /etc/.firstrun
 fi
 
 if [ ! -e .firstmount ]; then
-    mariadb-admin ping --protocol=tcp --host=mariadb -u "$MYSQL_USER" --password="$MYSQL_PASSWORD" --wait >/dev/null 2>/dev/null
+	sleep 10
 
-    # Check if WordPress is already installed
     if [ ! -f wp-load.php ]; then
-        echo "Installing WordPress..."
-
-        # Download and configure WordPress
         wp core download --allow-root || true
+		wp config create --allow-root \
+			--dbhost=mariadb \
+			--dbname="$MYSQL_DATABASE" \
+			--dbuser="$MYSQL_USER" \
+			--dbpass="$MYSQL_PASSWORD"
         wp core install --allow-root \
             --skip-email \
             --url="$DOMAIN_NAME" \
@@ -29,9 +29,6 @@ if [ ! -e .firstmount ]; then
             --admin_user="$WORDPRESS_ADMIN_USER" \
             --admin_password="$WORDPRESS_ADMIN_PASSWORD" \
             --admin_email="$WORDPRESS_ADMIN_EMAIL"
-
-    else
-        echo "WordPress is already installed."
     fi
     chmod o+w -R /var/www/html/wp-content
     touch /etc/.firstmount
