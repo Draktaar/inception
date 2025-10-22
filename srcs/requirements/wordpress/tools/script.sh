@@ -16,7 +16,7 @@ if [ ! -e .firstmount ]; then
 	sleep 10
 
     if [ ! -f wp-load.php ]; then
-        wp core download --allow-root || true
+        wp core download --allow-root
 		wp config create --allow-root \
 			--dbhost=mariadb \
 			--dbname="$MYSQL_DATABASE" \
